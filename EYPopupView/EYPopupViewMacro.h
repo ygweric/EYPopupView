@@ -40,5 +40,4 @@ alpha:1.0]
 #define kContentBottomMargin 12.0f
 #define kContentTopMargin 6.0f
 
-#define CONTEN_TEXT ((_type==EYInputPopupView_Type_single_line_text)?_tfContent:_tvContent)
 #endif

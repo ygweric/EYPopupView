@@ -7,19 +7,12 @@
 //
 
 #import "EYPopupView.h"
-
-
-
 @interface EYInputPopupView : EYPopupView
 
-- (id)initWithTitle:(NSString *)title
++ (void)popViewWithTitle:(NSString *)title
         contentText:(NSString *)content
-        type:(EYInputPopupView_Type)type;
-
-- (void)show;
-
-@property (nonatomic, copy) dispatch_block_t leftBlock;
-@property (nonatomic, copy) dispatch_block_t rightBlock;
-@property (nonatomic, copy) dispatch_block_t dismissBlock;
-
+        type:(EYInputPopupView_Type)type
+          leftBlock:(dispatch_block_t)leftBlock
+         rightBlock:(dispatch_block_t)rightBlock
+       dismissBlock:(dispatch_block_t)dismissBlock;
 @end
