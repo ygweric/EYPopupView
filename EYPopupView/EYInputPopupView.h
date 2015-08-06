@@ -7,12 +7,26 @@
 //
 
 #import "EYPopupView.h"
+
+/**
+ [EYInputPopupView popViewWithTitle:@"我是标题我是标题我是标题我是标题" contentText:@"Do somethi"
+ type:EYInputPopupView_Type_single_line_text
+ cancelBlock:^{
+ 
+ } confirmBlock:^(UIView *view, NSString *text) {
+ 
+ } dismissBlock:^{
+ 
+ }];
+ */
+
+typedef void (^clickBlock)(UIView* view, NSString* text);
 @interface EYInputPopupView : EYPopupView
 
 + (void)popViewWithTitle:(NSString *)title
-        contentText:(NSString *)content
-        type:(EYInputPopupView_Type)type
-          leftBlock:(dispatch_block_t)leftBlock
-         rightBlock:(dispatch_block_t)rightBlock
-       dismissBlock:(dispatch_block_t)dismissBlock;
+             contentText:(NSString *)content
+                    type:(EYInputPopupView_Type)type
+             cancelBlock:(dispatch_block_t)cancelBlock
+            confirmBlock:(clickBlock)confirmBlock
+            dismissBlock:(dispatch_block_t)dismissBlock;
 @end

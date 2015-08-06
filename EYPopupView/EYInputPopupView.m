@@ -9,8 +9,12 @@
 #import "EYInputPopupView.h"
 #import "EYPopupViewMacro.h"
 
-#define CONTENT_TEXT_POPVIEW ((popView.type==EYInputPopupView_Type_single_line_text)?popView.tfContent:popView.tvContent)
-#define CONTENT_TEXT ((_type==EYInputPopupView_Type_single_line_text)?_tfContent:_tvContent)
+#define CONTENT_VIEW_POPVIEW ((popView.type==EYInputPopupView_Type_single_line_text)?popView.tfContent:popView.tvContent)
+#define CONTENT_VIEW ((_type==EYInputPopupView_Type_single_line_text)?_tfContent:_tvContent)
+#define CONTENT_TEXT ((_type==EYInputPopupView_Type_single_line_text)?_tfContent.text:_tvContent.text)
+
+
+
 
 @interface EYInputPopupView ()<UITextViewDelegate,UITextFieldDelegate>
 
@@ -25,31 +29,29 @@
 @property (nonatomic, strong) UIView *backImageView;
 
 
-@property (nonatomic, copy) dispatch_block_t leftBlock;
-@property (nonatomic, copy) dispatch_block_t rightBlock;
+@property (nonatomic, copy) dispatch_block_t cancelBlock;
+//@property (nonatomic, copy) void (^confirmBlock)(UIView*, NSString*);
+@property (nonatomic, copy) clickBlock confirmBlock;
 @property (nonatomic, copy) dispatch_block_t dismissBlock;
 
 @end
 
 
-@implementation EYInputPopupView{
-    
-    
-}
+@implementation EYInputPopupView
 
 
 + (void)popViewWithTitle:(NSString *)title
              contentText:(NSString *)content
                     type:(EYInputPopupView_Type)type
-               leftBlock:(dispatch_block_t)leftBlock
-              rightBlock:(dispatch_block_t)rightBlock
+               cancelBlock:(dispatch_block_t)cancelBlock
+              confirmBlock:(clickBlock)confirmBlock
             dismissBlock:(dispatch_block_t)dismissBlock
 {
     EYInputPopupView* popView=[EYInputPopupView new];
     
     popView.type=type;
-    popView.leftBlock=leftBlock;
-    popView.rightBlock=rightBlock;
+    popView.cancelBlock=cancelBlock;
+    popView.confirmBlock=confirmBlock;
     popView.dismissBlock=dismissBlock;
 
     popView.layer.cornerRadius = 5.0;
@@ -92,8 +94,8 @@
             break;
     }
     
-    CGRect leftBtnFrame = CGRectMake((kAlertWidth - 2 * kCoupleButtonWidth - kButtonBottomMargin) * 0.5, CGRectGetMaxY(CONTENT_TEXT_POPVIEW.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
-    CGRect rightBtnFrame = CGRectMake(CGRectGetMaxX(leftBtnFrame) + kButtonBottomMargin, CGRectGetMaxY(CONTENT_TEXT_POPVIEW.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
+    CGRect leftBtnFrame = CGRectMake((kAlertWidth - 2 * kCoupleButtonWidth - kButtonBottomMargin) * 0.5, CGRectGetMaxY(CONTENT_VIEW_POPVIEW.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
+    CGRect rightBtnFrame = CGRectMake(CGRectGetMaxX(leftBtnFrame) + kButtonBottomMargin, CGRectGetMaxY(CONTENT_VIEW_POPVIEW.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
     popView.leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     popView.rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     popView.leftBtn.frame = leftBtnFrame;
@@ -131,8 +133,8 @@
 {
     _leftLeave = YES;
     [self dismissAlert];
-    if (self.leftBlock) {
-        self.leftBlock();
+    if (self.cancelBlock) {
+        self.cancelBlock();
     }
 }
 
@@ -140,8 +142,8 @@
 {
     _leftLeave = NO;
     [self dismissAlert];
-    if (self.rightBlock) {
-        self.rightBlock();
+    if (self.confirmBlock) {
+        self.confirmBlock(self,CONTENT_TEXT);
     }
 }
 
