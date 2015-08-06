@@ -10,16 +10,17 @@
 #import "EYPopupViewMacro.h"
 
 @interface EYTextPopupView ()
-{
-    BOOL _leftLeave;
-}
 
+@property (nonatomic) BOOL leftLeave;
 @property (nonatomic, strong) UILabel *lbTitle;
 @property (nonatomic, strong) UITextView *tvContent;
 @property (nonatomic, strong) UIButton *leftBtn;
 @property (nonatomic, strong) UIButton *rightBtn;
 @property (nonatomic, strong) UIView *backImageView;
 
+@property (nonatomic, copy) dispatch_block_t leftBlock;
+@property (nonatomic, copy) dispatch_block_t rightBlock;
+@property (nonatomic, copy) dispatch_block_t dismissBlock;
 
 @end
 
@@ -30,76 +31,82 @@
 }
 
 
-- (id)initWithTitle:(NSString *)title
++ (void)popViewWithTitle:(NSString *)title
         contentText:(NSString *)content
     leftButtonTitle:(NSString *)leftTitle
    rightButtonTitle:(NSString *)rigthTitle
+          leftBlock:(dispatch_block_t)leftBlock
+         rightBlock:(dispatch_block_t)rightBlock
+       dismissBlock:(dispatch_block_t)dismissBlock
 {
-    if (self = [super init]) {
-
+    EYTextPopupView* popView=[EYTextPopupView new];
+    
+    popView.leftBlock=leftBlock;
+    popView.rightBlock=rightBlock;
+    popView.dismissBlock=dismissBlock;
+    
+    popView.layer.cornerRadius = 5.0;
+    popView.backgroundColor = [UIColor whiteColor];
+    popView.lbTitle = [[UILabel alloc] initWithFrame:CGRectMake((kAlertWidth - kTitleWidth) * 0.5, kTitleTopMargin, kTitleWidth, kTitleHeight)];
+    popView.lbTitle.font = [UIFont boldSystemFontOfSize:20.0f];
+    popView.lbTitle.textColor = [UIColor colorWithRed:56.0/255.0 green:64.0/255.0 blue:71.0/255.0 alpha:1];
+    popView.lbTitle.backgroundColor=[UIColor clearColor];
+    [popView addSubview:popView.lbTitle];
+    popView.lbTitle.text = title;
+    
+    popView.tvContent = [[UITextView alloc] initWithFrame:CGRectMake((kAlertWidth - kContentWidth) * 0.5, CGRectGetMaxY(popView.lbTitle.frame)+kContentTopMargin, kContentWidth, kContentMinHeight)];
+    popView.tvContent.editable=NO;
+    popView.tvContent.selectable=NO;
+    popView.tvContent.textAlignment = popView.lbTitle.textAlignment = NSTextAlignmentCenter;
+    popView.tvContent.textColor = [UIColor colorWithRed:127.0/255.0 green:127.0/255.0 blue:127.0/255.0 alpha:1];
+    popView.tvContent.font = [UIFont systemFontOfSize:15.0f];
+    popView.tvContent.backgroundColor=[UIColor clearColor];
+    [popView addSubview:popView.tvContent];
+    popView.tvContent.text = content;
+    
+    
+    CGRect leftBtnFrame;
+    CGRect rightBtnFrame;
+    
+    if (!leftTitle) {
+        rightBtnFrame = CGRectMake((kAlertWidth - kSingleButtonWidth) * 0.5, CGRectGetMaxY(popView.tvContent.frame)+kContentBottomMargin, kSingleButtonWidth, kButtonHeight);
+        popView.rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        popView.rightBtn.frame = rightBtnFrame;
         
-        self.layer.cornerRadius = 5.0;
-        self.backgroundColor = [UIColor whiteColor];
-        self.lbTitle = [[UILabel alloc] initWithFrame:CGRectMake((kAlertWidth - kTitleWidth) * 0.5, kTitleTopMargin, kTitleWidth, kTitleHeight)];
-        self.lbTitle.font = [UIFont boldSystemFontOfSize:20.0f];
-        self.lbTitle.textColor = [UIColor colorWithRed:56.0/255.0 green:64.0/255.0 blue:71.0/255.0 alpha:1];
-        self.lbTitle.backgroundColor=[UIColor clearColor];
-        [self addSubview:self.lbTitle];
-        self.lbTitle.text = title;
-        
-        self.tvContent = [[UITextView alloc] initWithFrame:CGRectMake((kAlertWidth - kContentWidth) * 0.5, CGRectGetMaxY(self.lbTitle.frame)+kContentTopMargin, kContentWidth, kContentMinHeight)];
-        self.tvContent.editable=NO;
-        self.tvContent.selectable=NO;
-        self.tvContent.textAlignment = self.lbTitle.textAlignment = NSTextAlignmentCenter;
-        self.tvContent.textColor = [UIColor colorWithRed:127.0/255.0 green:127.0/255.0 blue:127.0/255.0 alpha:1];
-        self.tvContent.font = [UIFont systemFontOfSize:15.0f];
-        self.tvContent.backgroundColor=[UIColor clearColor];
-        [self addSubview:self.tvContent];
-        self.tvContent.text = content;
-        
-
-        CGRect leftBtnFrame;
-        CGRect rightBtnFrame;
-        
-        if (!leftTitle) {
-            rightBtnFrame = CGRectMake((kAlertWidth - kSingleButtonWidth) * 0.5, CGRectGetMaxY(self.tvContent.frame)+kContentBottomMargin, kSingleButtonWidth, kButtonHeight);
-            self.rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            self.rightBtn.frame = rightBtnFrame;
-            
-        }else {
-            leftBtnFrame = CGRectMake((kAlertWidth - 2 * kCoupleButtonWidth - kButtonBottomMargin) * 0.5, CGRectGetMaxY(self.tvContent.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
-            rightBtnFrame = CGRectMake(CGRectGetMaxX(leftBtnFrame) + kButtonBottomMargin, CGRectGetMaxY(self.tvContent.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
-            self.leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            self.rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            self.leftBtn.frame = leftBtnFrame;
-            self.rightBtn.frame = rightBtnFrame;
-        }
-        
-        [self.rightBtn setBackgroundImage:[UIImage imageWithColor:COLORRGB(0xfca2a5)] forState:UIControlStateNormal];
-        [self.leftBtn setBackgroundImage:[UIImage imageWithColor:COLORRGB(0x90d3fe)] forState:UIControlStateNormal];
-        [self.rightBtn setTitle:rigthTitle forState:UIControlStateNormal];
-        [self.leftBtn setTitle:leftTitle forState:UIControlStateNormal];
-        self.leftBtn.titleLabel.font = self.rightBtn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
-        [self.leftBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        
-        [self.leftBtn addTarget:self action:@selector(leftBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-        [self.rightBtn addTarget:self action:@selector(rightBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-        self.leftBtn.layer.masksToBounds = self.rightBtn.layer.masksToBounds = YES;
-        self.leftBtn.layer.cornerRadius = self.rightBtn.layer.cornerRadius = 3.0;
-        [self addSubview:self.leftBtn];
-        [self addSubview:self.rightBtn];
-        
-        UIButton *xButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [xButton setImage:[UIImage imageNamed:@"EYPopupView.bundle/btn_close_normal.png"] forState:UIControlStateNormal];
-        [xButton setImage:[UIImage imageNamed:@"EYPopupView.bundle/btn_close_selected.png"] forState:UIControlStateHighlighted];
-        xButton.frame = CGRectMake(kAlertWidth - 32, 0, 32, 32);
-        [self addSubview:xButton];
-        [xButton addTarget:self action:@selector(dismissAlert) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self resetFrame];
+    }else {
+        leftBtnFrame = CGRectMake((kAlertWidth - 2 * kCoupleButtonWidth - kButtonBottomMargin) * 0.5, CGRectGetMaxY(popView.tvContent.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
+        rightBtnFrame = CGRectMake(CGRectGetMaxX(leftBtnFrame) + kButtonBottomMargin, CGRectGetMaxY(popView.tvContent.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
+        popView.leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        popView.rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        popView.leftBtn.frame = leftBtnFrame;
+        popView.rightBtn.frame = rightBtnFrame;
     }
-    return self;
+    
+    [popView.rightBtn setBackgroundImage:[UIImage imageWithColor:COLORRGB(0xfca2a5)] forState:UIControlStateNormal];
+    [popView.leftBtn setBackgroundImage:[UIImage imageWithColor:COLORRGB(0x90d3fe)] forState:UIControlStateNormal];
+    [popView.rightBtn setTitle:rigthTitle forState:UIControlStateNormal];
+    [popView.leftBtn setTitle:leftTitle forState:UIControlStateNormal];
+    popView.leftBtn.titleLabel.font = popView.rightBtn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+    [popView.leftBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [popView.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    [popView.leftBtn addTarget:popView action:@selector(leftBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [popView.rightBtn addTarget:popView action:@selector(rightBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    popView.leftBtn.layer.masksToBounds = popView.rightBtn.layer.masksToBounds = YES;
+    popView.leftBtn.layer.cornerRadius = popView.rightBtn.layer.cornerRadius = 3.0;
+    [popView addSubview:popView.leftBtn];
+    [popView addSubview:popView.rightBtn];
+    
+    UIButton *xButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [xButton setImage:[UIImage imageNamed:@"EYPopupView.bundle/btn_close_normal.png"] forState:UIControlStateNormal];
+    [xButton setImage:[UIImage imageNamed:@"EYPopupView.bundle/btn_close_selected.png"] forState:UIControlStateHighlighted];
+    xButton.frame = CGRectMake(kAlertWidth - 32, 0, 32, 32);
+    [popView addSubview:xButton];
+    [xButton addTarget:popView action:@selector(dismissAlert) forControlEvents:UIControlEventTouchUpInside];
+    
+    [popView resetFrame];
+    [popView show];
+
 }
 
 - (void)leftBtnClicked:(id)sender

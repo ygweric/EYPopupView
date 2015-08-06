@@ -10,16 +10,13 @@
 
 @interface EYTextPopupView : EYPopupView
 
-- (id)initWithTitle:(NSString *)title
++ (void)popViewWithTitle:(NSString *)title
         contentText:(NSString *)content
     leftButtonTitle:(NSString *)leftTitle
-   rightButtonTitle:(NSString *)rigthTitle;
-
-- (void)show;
-
-@property (nonatomic, copy) dispatch_block_t leftBlock;
-@property (nonatomic, copy) dispatch_block_t rightBlock;
-@property (nonatomic, copy) dispatch_block_t dismissBlock;
+   rightButtonTitle:(NSString *)rigthTitle
+          leftBlock:(dispatch_block_t)leftBlock
+         rightBlock:(dispatch_block_t)rightBlock
+       dismissBlock:(dispatch_block_t)dismissBlock;
 
 @end
 
