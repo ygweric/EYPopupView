@@ -14,10 +14,10 @@
 		5F46274A1B7219BF009695EC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F4627491B7219BF009695EC /* Images.xcassets */; };
 		5F46274D1B7219BF009695EC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F46274B1B7219BF009695EC /* LaunchScreen.xib */; };
 		5F4627591B7219BF009695EC /* EYPopupView_ExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F4627581B7219BF009695EC /* EYPopupView_ExampleTests.m */; };
-		5F4627781B731C56009695EC /* EYInputPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F4627711B731C56009695EC /* EYInputPopupView.m */; };
-		5F4627791B731C56009695EC /* EYPopupView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5F4627721B731C56009695EC /* EYPopupView.bundle */; };
-		5F46277A1B731C56009695EC /* EYPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F4627741B731C56009695EC /* EYPopupView.m */; };
-		5F46277B1B731C56009695EC /* EYTextPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F4627771B731C56009695EC /* EYTextPopupView.m */; };
+		5F4627941B7342B8009695EC /* EYInputPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F46278C1B7342B8009695EC /* EYInputPopupView.m */; };
+		5F4627951B7342B8009695EC /* EYPopupView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5F46278D1B7342B8009695EC /* EYPopupView.bundle */; };
+		5F4627961B7342B8009695EC /* EYPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F46278F1B7342B8009695EC /* EYPopupView.m */; };
+		5F4627971B7342B8009695EC /* EYTextPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F4627931B7342B8009695EC /* EYTextPopupView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,14 +44,15 @@
 		5F4627521B7219BF009695EC /* EYPopupView_ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EYPopupView_ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F4627571B7219BF009695EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5F4627581B7219BF009695EC /* EYPopupView_ExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EYPopupView_ExampleTests.m; sourceTree = "<group>"; };
-		5F4627701B731C56009695EC /* EYInputPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EYInputPopupView.h; sourceTree = "<group>"; };
-		5F4627711B731C56009695EC /* EYInputPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EYInputPopupView.m; sourceTree = "<group>"; };
-		5F4627721B731C56009695EC /* EYPopupView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = EYPopupView.bundle; sourceTree = "<group>"; };
-		5F4627731B731C56009695EC /* EYPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EYPopupView.h; sourceTree = "<group>"; };
-		5F4627741B731C56009695EC /* EYPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EYPopupView.m; sourceTree = "<group>"; };
-		5F4627751B731C56009695EC /* EYPopupViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EYPopupViewHeader.h; sourceTree = "<group>"; };
-		5F4627761B731C56009695EC /* EYTextPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EYTextPopupView.h; sourceTree = "<group>"; };
-		5F4627771B731C56009695EC /* EYTextPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EYTextPopupView.m; sourceTree = "<group>"; };
+		5F46278B1B7342B8009695EC /* EYInputPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EYInputPopupView.h; sourceTree = "<group>"; };
+		5F46278C1B7342B8009695EC /* EYInputPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EYInputPopupView.m; sourceTree = "<group>"; };
+		5F46278D1B7342B8009695EC /* EYPopupView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = EYPopupView.bundle; sourceTree = "<group>"; };
+		5F46278E1B7342B8009695EC /* EYPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EYPopupView.h; sourceTree = "<group>"; };
+		5F46278F1B7342B8009695EC /* EYPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EYPopupView.m; sourceTree = "<group>"; };
+		5F4627901B7342B8009695EC /* EYPopupViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EYPopupViewHeader.h; sourceTree = "<group>"; };
+		5F4627911B7342B8009695EC /* EYPopupViewMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EYPopupViewMacro.h; sourceTree = "<group>"; };
+		5F4627921B7342B8009695EC /* EYTextPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EYTextPopupView.h; sourceTree = "<group>"; };
+		5F4627931B7342B8009695EC /* EYTextPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EYTextPopupView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +76,7 @@
 		5F4627301B7219BF009695EC = {
 			isa = PBXGroup;
 			children = (
-				5F46276F1B731C56009695EC /* EYPopupView */,
+				5F46278A1B7342B8009695EC /* EYPopupView */,
 				5F46273B1B7219BF009695EC /* EYPopupView_Example */,
 				5F4627551B7219BF009695EC /* EYPopupView_ExampleTests */,
 				5F46273A1B7219BF009695EC /* Products */,
@@ -132,19 +133,21 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		5F46276F1B731C56009695EC /* EYPopupView */ = {
+		5F46278A1B7342B8009695EC /* EYPopupView */ = {
 			isa = PBXGroup;
 			children = (
-				5F4627701B731C56009695EC /* EYInputPopupView.h */,
-				5F4627711B731C56009695EC /* EYInputPopupView.m */,
-				5F4627721B731C56009695EC /* EYPopupView.bundle */,
-				5F4627731B731C56009695EC /* EYPopupView.h */,
-				5F4627741B731C56009695EC /* EYPopupView.m */,
-				5F4627751B731C56009695EC /* EYPopupViewHeader.h */,
-				5F4627761B731C56009695EC /* EYTextPopupView.h */,
-				5F4627771B731C56009695EC /* EYTextPopupView.m */,
+				5F46278B1B7342B8009695EC /* EYInputPopupView.h */,
+				5F46278C1B7342B8009695EC /* EYInputPopupView.m */,
+				5F46278D1B7342B8009695EC /* EYPopupView.bundle */,
+				5F46278E1B7342B8009695EC /* EYPopupView.h */,
+				5F46278F1B7342B8009695EC /* EYPopupView.m */,
+				5F4627901B7342B8009695EC /* EYPopupViewHeader.h */,
+				5F4627911B7342B8009695EC /* EYPopupViewMacro.h */,
+				5F4627921B7342B8009695EC /* EYTextPopupView.h */,
+				5F4627931B7342B8009695EC /* EYTextPopupView.m */,
 			);
-			path = EYPopupView;
+			name = EYPopupView;
+			path = ../EYPopupView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -230,7 +233,7 @@
 				5F4627481B7219BF009695EC /* Main.storyboard in Resources */,
 				5F46274D1B7219BF009695EC /* LaunchScreen.xib in Resources */,
 				5F46274A1B7219BF009695EC /* Images.xcassets in Resources */,
-				5F4627791B731C56009695EC /* EYPopupView.bundle in Resources */,
+				5F4627951B7342B8009695EC /* EYPopupView.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,11 +251,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F46277B1B731C56009695EC /* EYTextPopupView.m in Sources */,
+				5F4627971B7342B8009695EC /* EYTextPopupView.m in Sources */,
 				5F4627451B7219BF009695EC /* ViewController.m in Sources */,
-				5F46277A1B731C56009695EC /* EYPopupView.m in Sources */,
+				5F4627961B7342B8009695EC /* EYPopupView.m in Sources */,
 				5F4627421B7219BF009695EC /* AppDelegate.m in Sources */,
-				5F4627781B731C56009695EC /* EYInputPopupView.m in Sources */,
+				5F4627941B7342B8009695EC /* EYInputPopupView.m in Sources */,
 				5F46273F1B7219BF009695EC /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

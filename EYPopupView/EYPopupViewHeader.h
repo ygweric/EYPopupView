@@ -9,8 +9,10 @@
 #ifndef EYPopupView_Example_EYPopupViewHeader_h
 #define EYPopupView_Example_EYPopupViewHeader_h
 
+
 #import "EYPopupView.h"
-#import "EYTextPopupView.h"
 #import "EYInputPopupView.h"
+#import "EYTextPopupView.h"
+
 
 #endif

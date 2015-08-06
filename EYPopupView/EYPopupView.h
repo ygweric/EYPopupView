@@ -10,6 +10,11 @@
 #import <QuartzCore/QuartzCore.h>
 
 
+typedef enum{
+    EYInputPopupView_Type_single_line_text,
+    EYInputPopupView_Type_multi_line,
+}EYInputPopupView_Type;
+
 @interface EYPopupView : UIView
 
 @end

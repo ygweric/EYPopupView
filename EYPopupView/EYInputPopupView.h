@@ -8,10 +8,13 @@
 
 #import "EYPopupView.h"
 
+
+
 @interface EYInputPopupView : EYPopupView
 
 - (id)initWithTitle:(NSString *)title
-        contentText:(NSString *)content;
+        contentText:(NSString *)content
+        type:(EYInputPopupView_Type)type;
 
 - (void)show;
 
