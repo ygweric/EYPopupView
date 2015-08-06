@@ -19,6 +19,12 @@ blue:(c&0xFF)/255.0         \
 alpha:1.0]
 
 
+typedef enum{
+    EYInputPopupView_Type_single_line_text,
+    EYInputPopupView_Type_multi_line,
+    //EYInputPopupView_Type_single_line_number,
+}EYInputPopupView_Type;
+
 @interface EYPopupView : UIView
 
 @end

@@ -35,8 +35,8 @@
     BOOL _leftLeave;
 }
 
-@property (nonatomic, strong) UILabel *alertTitleLabel;
-@property (nonatomic, strong) UITextView *alertContentLabel;
+@property (nonatomic, strong) UILabel *lbTitle;
+@property (nonatomic, strong) UITextView *tvContent;
 @property (nonatomic, strong) UIButton *leftBtn;
 @property (nonatomic, strong) UIButton *rightBtn;
 @property (nonatomic, strong) UIView *backImageView;
@@ -61,35 +61,35 @@
         
         self.layer.cornerRadius = 5.0;
         self.backgroundColor = [UIColor whiteColor];
-        self.alertTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake((kAlertWidth - kTitleWidth) * 0.5, kTitleTopMargin, kTitleWidth, kTitleHeight)];
-        self.alertTitleLabel.font = [UIFont boldSystemFontOfSize:20.0f];
-        self.alertTitleLabel.textColor = [UIColor colorWithRed:56.0/255.0 green:64.0/255.0 blue:71.0/255.0 alpha:1];
-        self.alertTitleLabel.backgroundColor=[UIColor clearColor];
-        [self addSubview:self.alertTitleLabel];
-        self.alertTitleLabel.text = title;
+        self.lbTitle = [[UILabel alloc] initWithFrame:CGRectMake((kAlertWidth - kTitleWidth) * 0.5, kTitleTopMargin, kTitleWidth, kTitleHeight)];
+        self.lbTitle.font = [UIFont boldSystemFontOfSize:20.0f];
+        self.lbTitle.textColor = [UIColor colorWithRed:56.0/255.0 green:64.0/255.0 blue:71.0/255.0 alpha:1];
+        self.lbTitle.backgroundColor=[UIColor clearColor];
+        [self addSubview:self.lbTitle];
+        self.lbTitle.text = title;
         
-        self.alertContentLabel = [[UITextView alloc] initWithFrame:CGRectMake((kAlertWidth - kContentWidth) * 0.5, CGRectGetMaxY(self.alertTitleLabel.frame)+kContentTopMargin, kContentWidth, kContentMinHeight)];
-        self.alertContentLabel.editable=NO;
-        self.alertContentLabel.selectable=NO;
-        self.alertContentLabel.textAlignment = self.alertTitleLabel.textAlignment = NSTextAlignmentCenter;
-        self.alertContentLabel.textColor = [UIColor colorWithRed:127.0/255.0 green:127.0/255.0 blue:127.0/255.0 alpha:1];
-        self.alertContentLabel.font = [UIFont systemFontOfSize:15.0f];
-        self.alertContentLabel.backgroundColor=[UIColor clearColor];
-        [self addSubview:self.alertContentLabel];
-        self.alertContentLabel.text = content;
+        self.tvContent = [[UITextView alloc] initWithFrame:CGRectMake((kAlertWidth - kContentWidth) * 0.5, CGRectGetMaxY(self.lbTitle.frame)+kContentTopMargin, kContentWidth, kContentMinHeight)];
+        self.tvContent.editable=NO;
+        self.tvContent.selectable=NO;
+        self.tvContent.textAlignment = self.lbTitle.textAlignment = NSTextAlignmentCenter;
+        self.tvContent.textColor = [UIColor colorWithRed:127.0/255.0 green:127.0/255.0 blue:127.0/255.0 alpha:1];
+        self.tvContent.font = [UIFont systemFontOfSize:15.0f];
+        self.tvContent.backgroundColor=[UIColor clearColor];
+        [self addSubview:self.tvContent];
+        self.tvContent.text = content;
         
 
         CGRect leftBtnFrame;
         CGRect rightBtnFrame;
         
         if (!leftTitle) {
-            rightBtnFrame = CGRectMake((kAlertWidth - kSingleButtonWidth) * 0.5, CGRectGetMaxY(self.alertContentLabel.frame)+kContentBottomMargin, kSingleButtonWidth, kButtonHeight);
+            rightBtnFrame = CGRectMake((kAlertWidth - kSingleButtonWidth) * 0.5, CGRectGetMaxY(self.tvContent.frame)+kContentBottomMargin, kSingleButtonWidth, kButtonHeight);
             self.rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             self.rightBtn.frame = rightBtnFrame;
             
         }else {
-            leftBtnFrame = CGRectMake((kAlertWidth - 2 * kCoupleButtonWidth - kButtonBottomMargin) * 0.5, CGRectGetMaxY(self.alertContentLabel.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
-            rightBtnFrame = CGRectMake(CGRectGetMaxX(leftBtnFrame) + kButtonBottomMargin, CGRectGetMaxY(self.alertContentLabel.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
+            leftBtnFrame = CGRectMake((kAlertWidth - 2 * kCoupleButtonWidth - kButtonBottomMargin) * 0.5, CGRectGetMaxY(self.tvContent.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
+            rightBtnFrame = CGRectMake(CGRectGetMaxX(leftBtnFrame) + kButtonBottomMargin, CGRectGetMaxY(self.tvContent.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
             self.leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             self.rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             self.leftBtn.frame = leftBtnFrame;
@@ -232,24 +232,24 @@
 }
 #pragma mark -
 -(void)resetFrame{
-    CGSize labelSize = [self.alertContentLabel sizeThatFits:CGSizeMake(kContentWidth, 1000)];
+    CGSize labelSize = [self.tvContent sizeThatFits:CGSizeMake(kContentWidth, 1000)];
     {
-        CGRect frame=self.alertContentLabel.frame;
+        CGRect frame=self.tvContent.frame;
         frame.size.height=MAX(labelSize.height, kContentMinHeight);
         frame.size.height=MIN(labelSize.height, kContentMaxHeight);
-        self.alertContentLabel.frame=frame;
-        self.alertContentLabel.scrollEnabled=(self.alertContentLabel.frame.size.height==kContentMaxHeight);
+        self.tvContent.frame=frame;
+        self.tvContent.scrollEnabled=(self.tvContent.frame.size.height==kContentMaxHeight);
     }
     {
-        CGRect leftBtnFrame = CGRectMake((kAlertWidth - 2 * kCoupleButtonWidth - kButtonBottomMargin) * 0.5, CGRectGetMaxY(self.alertContentLabel.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
-        CGRect rightBtnFrame = CGRectMake(CGRectGetMaxX(leftBtnFrame) + kButtonBottomMargin, CGRectGetMaxY(self.alertContentLabel.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
+        CGRect leftBtnFrame = CGRectMake((kAlertWidth - 2 * kCoupleButtonWidth - kButtonBottomMargin) * 0.5, CGRectGetMaxY(self.tvContent.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
+        CGRect rightBtnFrame = CGRectMake(CGRectGetMaxX(leftBtnFrame) + kButtonBottomMargin, CGRectGetMaxY(self.tvContent.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
         self.leftBtn.frame = leftBtnFrame;
         self.rightBtn.frame = rightBtnFrame;
     }
     {
         CGRect frame=self.frame;
         frame.size.height=kTitleTopMargin+kTitleHeight+kContentTopMargin+kContentBottomMargin+kButtonHeight+kButtonBottomMargin
-                    +self.alertContentLabel.frame.size.height;
+                    +self.tvContent.frame.size.height;
         frame.size.width=kAlertWidth;
         self.frame=frame;
     }

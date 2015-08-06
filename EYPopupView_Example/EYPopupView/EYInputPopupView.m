@@ -15,7 +15,7 @@
 #define kContentWidth (kAlertWidth-16)
 
 #define kContentMaxHeight 300.0f
-#define kContentMinHeight 34.0f
+#define kContentMinHeight 20.0f
 
 #define kTitleTopMargin 15.0f
 #define kTitleHeight 25.0f
@@ -30,18 +30,21 @@
 
 
 
-@interface EYInputPopupView ()<UITextViewDelegate>
+#define CONTEN_TEXT ((_type==EYInputPopupView_Type_single_line_text)?_tfContent:_tvContent)
+
+
+@interface EYInputPopupView ()<UITextViewDelegate,UITextFieldDelegate>
 {
     BOOL _leftLeave;
+    EYInputPopupView_Type _type;
 }
 
-@property (nonatomic, strong) UILabel *alertTitleLabel;
-@property (nonatomic, strong) UITextView *alertContentLabel;
+@property (nonatomic, strong) UILabel *lbTitle;
+@property (nonatomic, strong) UITextView *tvContent;
+@property (nonatomic, strong) UITextField *tfContent;
 @property (nonatomic, strong) UIButton *leftBtn;
 @property (nonatomic, strong) UIButton *rightBtn;
 @property (nonatomic, strong) UIView *backImageView;
-
-
 @end
 
 
@@ -53,32 +56,52 @@
 
 - (id)initWithTitle:(NSString *)title
         contentText:(NSString *)content
+        type:(EYInputPopupView_Type)type
 {
     if (self = [super init]) {
+        _type=type;
         self.layer.cornerRadius = 5.0;
         self.backgroundColor = [UIColor whiteColor];
-        self.alertTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake((kAlertWidth - kTitleWidth) * 0.5, kTitleTopMargin, kTitleWidth, kTitleHeight)];
-        self.alertTitleLabel.font = [UIFont boldSystemFontOfSize:20.0f];
-        self.alertTitleLabel.textColor = [UIColor colorWithRed:56.0/255.0 green:64.0/255.0 blue:71.0/255.0 alpha:1];
-                self.alertTitleLabel.backgroundColor=[UIColor clearColor];
-        [self addSubview:self.alertTitleLabel];
-        self.alertTitleLabel.text = title;
+        self.lbTitle = [[UILabel alloc] initWithFrame:CGRectMake((kAlertWidth - kTitleWidth) * 0.5, kTitleTopMargin, kTitleWidth, kTitleHeight)];
+        self.lbTitle.font = [UIFont boldSystemFontOfSize:20.0f];
+        self.lbTitle.textColor = [UIColor colorWithRed:56.0/255.0 green:64.0/255.0 blue:71.0/255.0 alpha:1];
+                self.lbTitle.backgroundColor=[UIColor clearColor];
+        [self addSubview:self.lbTitle];
+        self.lbTitle.text = title;
+        switch (type) {
+            case EYInputPopupView_Type_single_line_text:
+            {
+                self.tfContent = [[UITextField alloc] initWithFrame:CGRectMake((kAlertWidth - kContentWidth) * 0.5, CGRectGetMaxY(self.lbTitle.frame)+kContentTopMargin, kContentWidth, kContentMinHeight)];
+                self.tfContent.delegate=self;;
+                self.tfContent.textAlignment = NSTextAlignmentLeft;
+                self.tfContent.textColor = [UIColor colorWithRed:127.0/255.0 green:127.0/255.0 blue:127.0/255.0 alpha:1];
+                self.tfContent.font = [UIFont systemFontOfSize:15.0f];
+                self.tfContent.backgroundColor=[UIColor clearColor];
+                [self addSubview:self.tfContent];
+                self.tfContent.text = content;
+            }
+                break;
+            case EYInputPopupView_Type_multi_line:
+            {
+                self.tvContent = [[UITextView alloc] initWithFrame:CGRectMake((kAlertWidth - kContentWidth) * 0.5, CGRectGetMaxY(self.lbTitle.frame)+kContentTopMargin, kContentWidth, kContentMinHeight)];
+                self.tvContent.editable=YES;
+                self.tvContent.delegate=self;;
+                self.tvContent.selectable=YES;
+                self.tvContent.textAlignment = NSTextAlignmentLeft;
+                self.tvContent.textColor = [UIColor colorWithRed:127.0/255.0 green:127.0/255.0 blue:127.0/255.0 alpha:1];
+                self.tvContent.font = [UIFont systemFontOfSize:15.0f];
+                self.tvContent.backgroundColor=[UIColor clearColor];
+                [self addSubview:self.tvContent];
+                self.tvContent.text = content;
+            }
+                break;
+                
+            default:
+                break;
+        }
         
-        self.alertContentLabel = [[UITextView alloc] initWithFrame:CGRectMake((kAlertWidth - kContentWidth) * 0.5, CGRectGetMaxY(self.alertTitleLabel.frame)+kContentTopMargin, kContentWidth, kContentMinHeight)];
-        self.alertContentLabel.editable=YES;
-        self.alertContentLabel.delegate=self;;
-        self.alertContentLabel.selectable=YES;
-        self.alertContentLabel.textAlignment = NSTextAlignmentLeft;
-        self.alertContentLabel.textColor = [UIColor colorWithRed:127.0/255.0 green:127.0/255.0 blue:127.0/255.0 alpha:1];
-        self.alertContentLabel.font = [UIFont systemFontOfSize:15.0f];
-                self.alertContentLabel.backgroundColor=[UIColor clearColor];
-        [self addSubview:self.alertContentLabel];
-        self.alertContentLabel.text = content;
-        
-        
-
-        CGRect leftBtnFrame = CGRectMake((kAlertWidth - 2 * kCoupleButtonWidth - kButtonBottomMargin) * 0.5, CGRectGetMaxY(self.alertContentLabel.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
-        CGRect rightBtnFrame = CGRectMake(CGRectGetMaxX(leftBtnFrame) + kButtonBottomMargin, CGRectGetMaxY(self.alertContentLabel.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
+        CGRect leftBtnFrame = CGRectMake((kAlertWidth - 2 * kCoupleButtonWidth - kButtonBottomMargin) * 0.5, CGRectGetMaxY(CONTEN_TEXT.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
+        CGRect rightBtnFrame = CGRectMake(CGRectGetMaxX(leftBtnFrame) + kButtonBottomMargin, CGRectGetMaxY(CONTEN_TEXT.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
         self.leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         self.rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         self.leftBtn.frame = leftBtnFrame;
@@ -216,64 +239,120 @@
 #pragma mark UITapGestureRecognizer
 -(void)handleTapPress:(UITapGestureRecognizer *)gestureRecognizer
 {
-    if (_alertContentLabel.isFirstResponder) {
-        [_alertContentLabel resignFirstResponder];
-    } else {
-        _leftLeave = YES;
-        [self dismissAlert];
-    }
-}
-#pragma mark -
--(void)resetFrame{
-    CGSize labelSize = [self.alertContentLabel sizeThatFits:CGSizeMake(kContentWidth, 1000)];
-    {
-        CGRect frame=self.alertContentLabel.frame;
-        frame.size.height=MAX(labelSize.height, kContentMinHeight);
-        frame.size.height=MIN(labelSize.height, kContentMaxHeight);
-        self.alertContentLabel.frame=frame;
-        self.alertContentLabel.scrollEnabled=(self.alertContentLabel.frame.size.height==kContentMaxHeight);
-    }
-    {
-        CGRect leftBtnFrame = CGRectMake((kAlertWidth - 2 * kCoupleButtonWidth - kButtonBottomMargin) * 0.5, CGRectGetMaxY(self.alertContentLabel.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
-        CGRect rightBtnFrame = CGRectMake(CGRectGetMaxX(leftBtnFrame) + kButtonBottomMargin, CGRectGetMaxY(self.alertContentLabel.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
-        self.leftBtn.frame = leftBtnFrame;
-        self.rightBtn.frame = rightBtnFrame;
-    }
-    {
-        CGRect frame=self.frame;
-        frame.size.height=kTitleTopMargin+kTitleHeight+kContentTopMargin+kContentBottomMargin+kButtonHeight+kButtonBottomMargin
-        +self.alertContentLabel.frame.size.height;
-        frame.size.width=kAlertWidth;
-        self.frame=frame;
+    
+    switch (_type) {
+        case EYInputPopupView_Type_single_line_text:
+        {
+            if (_tfContent.isFirstResponder) {
+                [_tfContent resignFirstResponder];
+            } else {
+                _leftLeave = YES;
+                [self dismissAlert];
+            }
+        }
+            break;
+        case EYInputPopupView_Type_multi_line:
+        {
+            if (_tvContent.isFirstResponder) {
+                [_tvContent resignFirstResponder];
+            } else {
+                _leftLeave = YES;
+                [self dismissAlert];
+            }
+        }
+            break;
+            
+        default:
+            break;
     }
     
 }
-#pragma mark UITextView
+#pragma mark -
+-(void)resetFrame{
+    
+    
+    switch (_type) {
+        case EYInputPopupView_Type_single_line_text:
+        {
+            CGRect frame=self.frame;
+            frame.size.height=kTitleTopMargin+kTitleHeight+kContentTopMargin+kContentBottomMargin+kButtonHeight+kButtonBottomMargin
+                    +self.tfContent.frame.size.height;
+            frame.size.width=kAlertWidth;
+            self.frame=frame;
+        }
+            break;
+        case EYInputPopupView_Type_multi_line:
+        {
+            CGSize labelSize = [self.tvContent sizeThatFits:CGSizeMake(kContentWidth, 1000)];
+            {
+                CGRect frame=self.tvContent.frame;
+                frame.size.height=MAX(labelSize.height, kContentMinHeight);
+                frame.size.height=MIN(labelSize.height, kContentMaxHeight);
+                self.tvContent.frame=frame;
+                self.tvContent.scrollEnabled=(self.tvContent.frame.size.height==kContentMaxHeight);
+            }
+            {
+                CGRect leftBtnFrame = CGRectMake((kAlertWidth - 2 * kCoupleButtonWidth - kButtonBottomMargin) * 0.5, CGRectGetMaxY(self.tvContent.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
+                CGRect rightBtnFrame = CGRectMake(CGRectGetMaxX(leftBtnFrame) + kButtonBottomMargin, CGRectGetMaxY(self.tvContent.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
+                self.leftBtn.frame = leftBtnFrame;
+                self.rightBtn.frame = rightBtnFrame;
+            }
+            {
+                CGRect frame=self.frame;
+                frame.size.height=kTitleTopMargin+kTitleHeight+kContentTopMargin+kContentBottomMargin+kButtonHeight+kButtonBottomMargin
+                +self.tvContent.frame.size.height;
+                frame.size.width=kAlertWidth;
+                self.frame=frame;
+            }
+        }
+            break;
+            
+        default:
+            break;
+    }
+ 
+    
+}
+#pragma mark UITextView & 
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
+    [self slipView:YES offset:80];
+}
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    [self slipView:NO offset:0];
+}
 -(void)textViewDidChange:(UITextView *)textView{
     [self resetFrame];
 }
 -(void)textViewDidBeginEditing:(UITextView *)textView{
-    UIViewController *topVC = [self appRootViewController];
-    [UIView animateWithDuration:0.2f delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-        self.transform = CGAffineTransformMakeRotation(0);
-        self.frame  = CGRectMake((CGRectGetWidth(topVC.view.bounds) - kAlertWidth) * 0.5,
-                                              topVC.view.bounds.origin.y+30,
-                                              self.frame.size.width,
-                                              self.frame.size.height);
-    } completion:^(BOOL finished) {
-    }];
+    [self slipView:YES offset:30];
 }
 
 -(void)textViewDidEndEditing:(UITextView *)textView{
+    [self slipView:NO offset:0];
+}
+
+-(void)slipView:(BOOL)isUp offset:(float)offset{
     UIViewController *topVC = [self appRootViewController];
-    [UIView animateWithDuration:0.2f delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-        self.transform = CGAffineTransformMakeRotation(0);
-        self.frame  = CGRectMake((CGRectGetWidth(topVC.view.bounds) - kAlertWidth) * 0.5,
-                                 (CGRectGetHeight(topVC.view.bounds) - self.frame.size.height) * 0.5,
-                                 self.frame.size.width,
-                                 self.frame.size.height);
-    } completion:^(BOOL finished) {
-    }];
+    if (isUp) {
+        [UIView animateWithDuration:0.2f delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+            self.transform = CGAffineTransformMakeRotation(0);
+            self.frame  = CGRectMake((CGRectGetWidth(topVC.view.bounds) - kAlertWidth) * 0.5,
+                                     topVC.view.bounds.origin.y+offset,
+                                     self.frame.size.width,
+                                     self.frame.size.height);
+        } completion:^(BOOL finished) {
+        }];
+    } else {
+        [UIView animateWithDuration:0.2f delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+            self.transform = CGAffineTransformMakeRotation(0);
+            self.frame  = CGRectMake((CGRectGetWidth(topVC.view.bounds) - kAlertWidth) * 0.5,
+                                     (CGRectGetHeight(topVC.view.bounds) - self.frame.size.height) * 0.5,
+                                     self.frame.size.width,
+                                     self.frame.size.height);
+        } completion:^(BOOL finished) {
+        }];
+    }
+   
 }
 
 @end
