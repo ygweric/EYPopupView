@@ -26,7 +26,7 @@ alpha:1.0]
 #define kTitleWidth (kAlertWidth-16-32)
 #define kContentWidth (kAlertWidth-16)
 
-#define kContentMaxHeight 300.0f
+#define kContentMaxHeight 150.0f
 #define kContentMinHeight 34.0f
 
 #define kTitleTopMargin 15.0f

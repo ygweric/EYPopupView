@@ -1,55 +1,44 @@
 //
-//  EYInputPopupView.m
+//  EYTagPopupView.m
 //  EYPopupView_Example
 //
 //  Created by ericyang on 8/5/15.
 //  Copyright (c) 2015 Eric Yang. All rights reserved.
 //
 
-#import "EYInputPopupView.h"
+#import "EYTagPopupView.h"
 #import "EYPopupViewMacro.h"
-
-#define CONTENT_VIEW_POPVIEW ((popView.type==EYInputPopupView_Type_single_line_text)?popView.tfContent:popView.tvContent)
-#define CONTENT_VIEW ((_type==EYInputPopupView_Type_single_line_text)?_tfContent:_tvContent)
-#define CONTENT_TEXT ((_type==EYInputPopupView_Type_single_line_text)?_tfContent.text:_tvContent.text)
+#import "EYTagView.h"
 
 
-
-
-@interface EYInputPopupView ()<UITextViewDelegate,UITextFieldDelegate>
+@interface EYTagPopupView ()<EYTagViewDelegate,UITextFieldDelegate>
 
 
 @property (nonatomic) BOOL leftLeave;
-@property (nonatomic) EYInputPopupView_Type type;
 @property (nonatomic, strong) UILabel *lbTitle;
-@property (nonatomic, strong) UITextView *tvContent;
-@property (nonatomic, strong) UITextField *tfContent;
+@property (nonatomic, strong) EYTagView* tagView;
 @property (nonatomic, strong) UIButton *leftBtn;
 @property (nonatomic, strong) UIButton *rightBtn;
 @property (nonatomic, strong) UIView *backImageView;
 
 
 @property (nonatomic, copy) dispatch_block_t cancelBlock;
-//@property (nonatomic, copy) void (^confirmBlock)(UIView*, NSString*);
-@property (nonatomic, copy) clickBlock confirmBlock;
+@property (nonatomic, copy) arrayClickBlock confirmBlock;
 @property (nonatomic, copy) dispatch_block_t dismissBlock;
 
 @end
 
 
-@implementation EYInputPopupView
+@implementation EYTagPopupView
 
 
 + (void)popViewWithTitle:(NSString *)title
-             contentText:(NSString *)content
-                    type:(EYInputPopupView_Type)type
+             tags:(NSArray *)tags
                cancelBlock:(dispatch_block_t)cancelBlock
-              confirmBlock:(clickBlock)confirmBlock
+              confirmBlock:(arrayClickBlock)confirmBlock
             dismissBlock:(dispatch_block_t)dismissBlock
 {
-    EYInputPopupView* popView=[EYInputPopupView new];
-    
-    popView.type=type;
+    EYTagPopupView* popView=[EYTagPopupView new];
     popView.cancelBlock=cancelBlock;
     popView.confirmBlock=confirmBlock;
     popView.dismissBlock=dismissBlock;
@@ -63,40 +52,30 @@
     popView.lbTitle.backgroundColor=[UIColor clearColor];
     [popView addSubview:popView.lbTitle];
     popView.lbTitle.text = title;
-    switch (type) {
-        case EYInputPopupView_Type_single_line_text:
-        {
-            popView.tfContent = [[UITextField alloc] initWithFrame:CGRectMake((kAlertWidth - kContentWidth) * 0.5, CGRectGetMaxY(popView.lbTitle.frame)+kContentTopMargin, kContentWidth, kContentMinHeight)];
-            popView.tfContent.delegate=popView;;
-            popView.tfContent.textAlignment = NSTextAlignmentLeft;
-            popView.tfContent.textColor = [UIColor colorWithRed:127.0/255.0 green:127.0/255.0 blue:127.0/255.0 alpha:1];
-            popView.tfContent.font = [UIFont systemFontOfSize:15.0f];
-            popView.tfContent.backgroundColor=[UIColor clearColor];
-            [popView addSubview:popView.tfContent];
-            popView.tfContent.text = content;
-        }
-            break;
-        case EYInputPopupView_Type_multi_line:
-        {
-            popView.tvContent = [[UITextView alloc] initWithFrame:CGRectMake((kAlertWidth - kContentWidth) * 0.5, CGRectGetMaxY(popView.lbTitle.frame)+kContentTopMargin, kContentWidth, kContentMinHeight)];
-            popView.tvContent.editable=YES;
-            popView.tvContent.delegate=popView;;
-            popView.tvContent.selectable=YES;
-            popView.tvContent.textAlignment = NSTextAlignmentLeft;
-            popView.tvContent.textColor = [UIColor colorWithRed:127.0/255.0 green:127.0/255.0 blue:127.0/255.0 alpha:1];
-            popView.tvContent.font = [UIFont systemFontOfSize:15.0f];
-            popView.tvContent.backgroundColor=[UIColor clearColor];
-            [popView addSubview:popView.tvContent];
-            popView.tvContent.text = content;
-        }
-            break;
-            
-        default:
-            break;
+   
+
+    {
+        EYTagView* tagView=[[EYTagView alloc]initWithFrame:CGRectMake((kAlertWidth - kContentWidth) * 0.5, CGRectGetMaxY(popView.lbTitle.frame)+kContentTopMargin, kContentWidth, kContentMinHeight)];
+        tagView.delegate=popView;
+        
+        tagView.colorTag=COLORRGB(0xffffff);
+        tagView.colorTagBg=COLORRGB(0x2ab44e);
+        tagView.colorInput=COLORRGB(0x2ab44e);
+        tagView.colorInputBg=COLORRGB(0xffffff);
+        tagView.colorInputPlaceholder=COLORRGB(0x2ab44e);
+        tagView.backgroundColor=COLORRGB(0xffffff);
+        tagView.colorInputBoard=COLORRGB(0x2ab44e);
+        tagView.viewMaxHeight=kContentMaxHeight;
+        [tagView addTags:tags];
+        [popView addSubview:tagView];
+        popView.tagView=tagView;
     }
     
-    CGRect leftBtnFrame = CGRectMake((kAlertWidth - 2 * kCoupleButtonWidth - kButtonBottomMargin) * 0.5, CGRectGetMaxY(CONTENT_VIEW_POPVIEW.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
-    CGRect rightBtnFrame = CGRectMake(CGRectGetMaxX(leftBtnFrame) + kButtonBottomMargin, CGRectGetMaxY(CONTENT_VIEW_POPVIEW.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
+    
+    
+    
+    CGRect leftBtnFrame = CGRectMake((kAlertWidth - 2 * kCoupleButtonWidth - kButtonBottomMargin) * 0.5, CGRectGetMaxY(popView.tagView.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
+    CGRect rightBtnFrame = CGRectMake(CGRectGetMaxX(leftBtnFrame) + kButtonBottomMargin, CGRectGetMaxY(popView.tagView.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
     popView.leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     popView.rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     popView.leftBtn.frame = leftBtnFrame;
@@ -144,7 +123,7 @@
     _leftLeave = NO;
     [self dismissAlert];
     if (self.confirmBlock) {
-        self.confirmBlock(self,CONTENT_TEXT);
+        self.confirmBlock(self,_tagView.tagStrings);
     }
 }
 
@@ -235,95 +214,39 @@
 -(void)handleTapPress:(UITapGestureRecognizer *)gestureRecognizer
 {
     
-    switch (_type) {
-        case EYInputPopupView_Type_single_line_text:
-        {
-            if (_tfContent.isFirstResponder) {
-                [_tfContent resignFirstResponder];
-            } else {
-                _leftLeave = YES;
-                [self dismissAlert];
-            }
-        }
-            break;
-        case EYInputPopupView_Type_multi_line:
-        {
-            if (_tvContent.isFirstResponder) {
-                [_tvContent resignFirstResponder];
-            } else {
-                _leftLeave = YES;
-                [self dismissAlert];
-            }
-        }
-            break;
-            
-        default:
-            break;
+    if (self.tagView.tfInput.isFirstResponder) {
+        [self.tagView.tfInput resignFirstResponder];
+    } else {
+        _leftLeave = YES;
+        [self dismissAlert];
     }
     
 }
 #pragma mark -
 -(void)resetFrame{
-    
-    
-    switch (_type) {
-        case EYInputPopupView_Type_single_line_text:
-        {
-            CGRect frame=self.frame;
-            frame.size.height=kTitleTopMargin+kTitleHeight+kContentTopMargin+kContentBottomMargin+kButtonHeight+kButtonBottomMargin
-                    +self.tfContent.frame.size.height;
-            frame.size.width=kAlertWidth;
-            self.frame=frame;
-        }
-            break;
-        case EYInputPopupView_Type_multi_line:
-        {
-            CGSize labelSize = [self.tvContent sizeThatFits:CGSizeMake(kContentWidth, 1000)];
-            {
-                CGRect frame=self.tvContent.frame;
-                frame.size.height=MAX(labelSize.height, kContentMinHeight);
-                frame.size.height=MIN(labelSize.height, kContentMaxHeight);
-                self.tvContent.frame=frame;
-                self.tvContent.scrollEnabled=(self.tvContent.frame.size.height==kContentMaxHeight);
-            }
-            {
-                CGRect leftBtnFrame = CGRectMake((kAlertWidth - 2 * kCoupleButtonWidth - kButtonBottomMargin) * 0.5, CGRectGetMaxY(self.tvContent.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
-                CGRect rightBtnFrame = CGRectMake(CGRectGetMaxX(leftBtnFrame) + kButtonBottomMargin, CGRectGetMaxY(self.tvContent.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
-                self.leftBtn.frame = leftBtnFrame;
-                self.rightBtn.frame = rightBtnFrame;
-            }
-            {
-                CGRect frame=self.frame;
-                frame.size.height=kTitleTopMargin+kTitleHeight+kContentTopMargin+kContentBottomMargin+kButtonHeight+kButtonBottomMargin
-                +self.tvContent.frame.size.height;
-                frame.size.width=kAlertWidth;
-                self.frame=frame;
-            }
-        }
-            break;
-            
-        default:
-            break;
+    {
+        CGRect leftBtnFrame = CGRectMake((kAlertWidth - 2 * kCoupleButtonWidth - kButtonBottomMargin) * 0.5, CGRectGetMaxY(self.tagView.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
+        CGRect rightBtnFrame = CGRectMake(CGRectGetMaxX(leftBtnFrame) + kButtonBottomMargin, CGRectGetMaxY(self.tagView.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
+        self.leftBtn.frame = leftBtnFrame;
+        self.rightBtn.frame = rightBtnFrame;
     }
- 
-    
+    {
+        CGRect frame=self.frame;
+        frame.size.height=kTitleTopMargin+kTitleHeight+kContentTopMargin+kContentBottomMargin+kButtonHeight+kButtonBottomMargin
+        +self.tagView.frame.size.height;
+        frame.size.width=kAlertWidth;
+        self.frame=frame;
+    }
 }
-#pragma mark UITextView & 
--(void)textFieldDidBeginEditing:(UITextField *)textField{
-    [self slipView:YES offset:80];
-}
--(void)textFieldDidEndEditing:(UITextField *)textField{
-    [self slipView:NO offset:0];
-}
--(void)textViewDidChange:(UITextView *)textView{
+#pragma mark UITextView &
+-(void)heightDidChangedTagView:(EYTagView *)tagView{
     [self resetFrame];
 }
--(void)textViewDidBeginEditing:(UITextView *)textView{
-    [self slipView:YES offset:30];
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    [self slipView:NO offset:60];
 }
-
--(void)textViewDidEndEditing:(UITextView *)textView{
-    [self slipView:NO offset:0];
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
+    [self slipView:YES offset:60];
 }
 
 -(void)slipView:(BOOL)isUp offset:(float)offset{

@@ -13,6 +13,7 @@
 #import "EYPopupView.h"
 #import "EYInputPopupView.h"
 #import "EYTextPopupView.h"
+#import "EYTagPopupView.h"
 
 
 #endif

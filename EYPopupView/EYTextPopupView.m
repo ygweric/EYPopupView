@@ -50,6 +50,7 @@
     popView.lbTitle = [[UILabel alloc] initWithFrame:CGRectMake((kAlertWidth - kTitleWidth) * 0.5, kTitleTopMargin, kTitleWidth, kTitleHeight)];
     popView.lbTitle.font = [UIFont boldSystemFontOfSize:20.0f];
     popView.lbTitle.textColor = [UIColor colorWithRed:56.0/255.0 green:64.0/255.0 blue:71.0/255.0 alpha:1];
+    popView.lbTitle.textAlignment=NSTextAlignmentCenter;
     popView.lbTitle.backgroundColor=[UIColor clearColor];
     [popView addSubview:popView.lbTitle];
     popView.lbTitle.text = title;

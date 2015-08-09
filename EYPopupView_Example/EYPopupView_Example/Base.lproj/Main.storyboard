@@ -61,6 +61,15 @@
                                     <action selector="showMultiLineInputView:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="gjB-7U-nUI"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KCY-S4-Xse">
+                                <rect key="frame" x="41" y="239" width="128" height="30"/>
+                                <state key="normal" title="show tag edit view">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showTagEditView:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="5ut-0d-n7w"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>

@@ -96,6 +96,47 @@
 }
 
 
+- (IBAction)showTagEditView:(id)sender {
+    NSArray* tags=@[
+                    @"111",
+                    @"222",
+                    @"犬瘟热",
+                    @"惹我欠人情无人区污染污染",
+                    @"3而是",
+                    @"是",
+                    @"是放大法撒旦",
+                    @"撒的发",
+                    @"阿斯顿发发生法士大夫",
+                    @"撒的发",
+                    @"阿是发放的",
+                    @"asdfasdf啊大法师",
+                    @"阿发",
+                    @"撒的发是否是地方萨菲阿Sa",
+                    @"发色发",
+                    @"额发我份",
+                    @"会计法",
+                    @"客人房交付给",
+                    @"ut6utfj大一点",
+                    @"考估计附加费",
+                    @"开房间风好大",
+                    @"人提交方法",
+                    @"i7uhft 代发货",
+                    @"放开眼界",
+                    @"7就仿佛",
+//                    @"他附加费",
+//                    @"丰台ifi7",
+//                    @"iyiiuiui国防教育",
+                    ];
+    [EYTagPopupView popViewWithTitle:@"我是标题我是标题我是标题我是标题" tags:tags cancelBlock:^{
+        
+    } confirmBlock:^(UIView *view, NSArray *tags) {
+        NSLog(@"tags:   %@",tags);
+    } dismissBlock:^{
+        
+    }];
+}
+
+
 
 
 
