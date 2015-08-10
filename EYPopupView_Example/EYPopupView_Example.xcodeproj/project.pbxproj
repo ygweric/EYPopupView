@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5F3FDFA01B775AFB00DE721B /* EYTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3FDF9F1B775AFB00DE721B /* EYTagView.m */; };
 		5F3FDFA31B775B6200DE721B /* EYTagPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3FDFA21B775B6200DE721B /* EYTagPopupView.m */; };
 		5F46273F1B7219BF009695EC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F46273E1B7219BF009695EC /* main.m */; };
 		5F4627421B7219BF009695EC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F4627411B7219BF009695EC /* AppDelegate.m */; };
@@ -20,6 +19,7 @@
 		5F4627951B7342B8009695EC /* EYPopupView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5F46278D1B7342B8009695EC /* EYPopupView.bundle */; };
 		5F4627961B7342B8009695EC /* EYPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F46278F1B7342B8009695EC /* EYPopupView.m */; };
 		5F4627971B7342B8009695EC /* EYTextPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F4627931B7342B8009695EC /* EYTextPopupView.m */; };
+		5FEB2F291B785D2D008DE827 /* EYTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FEB2F281B785D2D008DE827 /* EYTagView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,8 +33,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5F3FDF9E1B775AFB00DE721B /* EYTagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EYTagView.h; sourceTree = "<group>"; };
-		5F3FDF9F1B775AFB00DE721B /* EYTagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EYTagView.m; sourceTree = "<group>"; };
 		5F3FDFA11B775B6200DE721B /* EYTagPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EYTagPopupView.h; sourceTree = "<group>"; };
 		5F3FDFA21B775B6200DE721B /* EYTagPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EYTagPopupView.m; sourceTree = "<group>"; };
 		5F4627391B7219BF009695EC /* EYPopupView_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EYPopupView_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -59,6 +57,8 @@
 		5F4627911B7342B8009695EC /* EYPopupViewMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EYPopupViewMacro.h; sourceTree = "<group>"; };
 		5F4627921B7342B8009695EC /* EYTextPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EYTextPopupView.h; sourceTree = "<group>"; };
 		5F4627931B7342B8009695EC /* EYTextPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EYTextPopupView.m; sourceTree = "<group>"; };
+		5FEB2F271B785D2D008DE827 /* EYTagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EYTagView.h; sourceTree = "<group>"; };
+		5FEB2F281B785D2D008DE827 /* EYTagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EYTagView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,20 +79,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5F3FDF9D1B775AFB00DE721B /* EYTagView */ = {
-			isa = PBXGroup;
-			children = (
-				5F3FDF9E1B775AFB00DE721B /* EYTagView.h */,
-				5F3FDF9F1B775AFB00DE721B /* EYTagView.m */,
-			);
-			name = EYTagView;
-			path = ../../EYTagView/EYTagView;
-			sourceTree = "<group>";
-		};
 		5F4627301B7219BF009695EC = {
 			isa = PBXGroup;
 			children = (
-				5F3FDF9D1B775AFB00DE721B /* EYTagView */,
+				5FEB2F261B785D2D008DE827 /* EYTagView */,
 				5F46278A1B7342B8009695EC /* EYPopupView */,
 				5F46273B1B7219BF009695EC /* EYPopupView_Example */,
 				5F4627551B7219BF009695EC /* EYPopupView_ExampleTests */,
@@ -167,6 +157,16 @@
 			);
 			name = EYPopupView;
 			path = ../EYPopupView;
+			sourceTree = "<group>";
+		};
+		5FEB2F261B785D2D008DE827 /* EYTagView */ = {
+			isa = PBXGroup;
+			children = (
+				5FEB2F271B785D2D008DE827 /* EYTagView.h */,
+				5FEB2F281B785D2D008DE827 /* EYTagView.m */,
+			);
+			name = EYTagView;
+			path = ../EYTagView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,11 +273,11 @@
 				5F4627971B7342B8009695EC /* EYTextPopupView.m in Sources */,
 				5F4627451B7219BF009695EC /* ViewController.m in Sources */,
 				5F4627961B7342B8009695EC /* EYPopupView.m in Sources */,
+				5FEB2F291B785D2D008DE827 /* EYTagView.m in Sources */,
 				5F4627421B7219BF009695EC /* AppDelegate.m in Sources */,
 				5F3FDFA31B775B6200DE721B /* EYTagPopupView.m in Sources */,
 				5F4627941B7342B8009695EC /* EYInputPopupView.m in Sources */,
 				5F46273F1B7219BF009695EC /* main.m in Sources */,
-				5F3FDFA01B775AFB00DE721B /* EYTagView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
