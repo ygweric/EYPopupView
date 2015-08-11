@@ -11,6 +11,7 @@
 #import "EYTagView.h"
 
 
+
 @interface EYTagPopupView ()<EYTagViewDelegate,UITextFieldDelegate>
 
 
@@ -32,12 +33,26 @@
 @implementation EYTagPopupView
 
 
+
 + (void)popViewWithTitle:(NSString *)title
-             tags:(NSArray *)tags
-               cancelBlock:(dispatch_block_t)cancelBlock
-              confirmBlock:(arrayClickBlock)confirmBlock
+                    tags:(NSArray *)tags
+                    type:(EYTagPopupView_Type)type
+             cancelBlock:(dispatch_block_t)cancelBlock
+            confirmBlock:(arrayClickBlock)confirmBlock
             dismissBlock:(dispatch_block_t)dismissBlock
 {
+    [self popViewWithTitle:title tags:tags selectTags:nil type:type cancelBlock:cancelBlock confirmBlock:confirmBlock dismissBlock:dismissBlock];
+ 
+}
++ (void)popViewWithTitle:(NSString *)title
+                    tags:(NSArray *)tags
+                    selectTags:(NSArray *)selectTags
+                    type:(EYTagPopupView_Type)type
+             cancelBlock:(dispatch_block_t)cancelBlock
+            confirmBlock:(arrayClickBlock)confirmBlock
+            dismissBlock:(dispatch_block_t)dismissBlock
+{
+
     EYTagPopupView* popView=[EYTagPopupView new];
     popView.cancelBlock=cancelBlock;
     popView.confirmBlock=confirmBlock;
@@ -66,7 +81,11 @@
         tagView.backgroundColor=COLORRGB(0xffffff);
         tagView.colorInputBoard=COLORRGB(0x2ab44e);
         tagView.viewMaxHeight=kContentMaxHeight;
+        tagView.type=(EYTagView_Type)type;
         [tagView addTags:tags];
+        if (selectTags) {
+            [tagView setTagStringsSelected:[NSMutableArray arrayWithArray:selectTags]];
+        }
         [popView addSubview:tagView];
         popView.tagView=tagView;
     }

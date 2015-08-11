@@ -10,6 +10,15 @@
 #define EYPopupView_Example_EYPopupViewHeader_h
 
 
+typedef enum{
+    EYTagPopupView_Type_Edit,
+    EYTagPopupView_Type_Display,
+    EYTagPopupView_Type_Single_Selected,
+    EYTagPopupView_Type_Multi_Selected,
+}EYTagPopupView_Type;
+
+
+
 #import "EYPopupView.h"
 #import "EYInputPopupView.h"
 #import "EYTextPopupView.h"

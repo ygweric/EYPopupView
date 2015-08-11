@@ -70,6 +70,24 @@
                                     <action selector="showTagEditView:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="5ut-0d-n7w"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ESa-zy-aCM">
+                                <rect key="frame" x="41" y="277" width="102" height="30"/>
+                                <state key="normal" title="show radio tag">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showRadioTag:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="gPV-9s-flk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WiD-XX-kh1">
+                                <rect key="frame" x="41" y="304" width="134" height="30"/>
+                                <state key="normal" title="show checkbox tag">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showCheckboxTag:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="n63-bb-2tu"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
