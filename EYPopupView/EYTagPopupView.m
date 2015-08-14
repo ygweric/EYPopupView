@@ -74,12 +74,12 @@
         tagView.delegate=popView;
         
         tagView.colorTag=COLORRGB(0xffffff);
-        tagView.colorTagBg=COLORRGB(0x2ab44e);
-        tagView.colorInput=COLORRGB(0x2ab44e);
+        tagView.colorTagBg=COLORRGB(0xfcbf90);
+        tagView.colorInput=COLORRGB(0xfcbf90);
         tagView.colorInputBg=COLORRGB(0xffffff);
-        tagView.colorInputPlaceholder=COLORRGB(0x2ab44e);
+        tagView.colorInputPlaceholder=COLORRGB(0xfcbf90);
         tagView.backgroundColor=COLORRGB(0xffffff);
-        tagView.colorInputBoard=COLORRGB(0x2ab44e);
+        tagView.colorInputBoard=COLORRGB(0xfcbf90);
         tagView.viewMaxHeight=kContentMaxHeight;
         tagView.type=(EYTagView_Type)type;
         [tagView addTags:tags];
