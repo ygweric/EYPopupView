@@ -132,7 +132,7 @@
  
 }
 - (IBAction)showMultiLineInputView:(id)sender {
-    [EYInputPopupView popViewWithTitle:@"我是标题我是标题我是标题我是标题" contentText:@"的 但在与人相处以及平时做事时 还是会略微显得自卑 自卑于自己的身材 自卑于自己的能力 对于别人的评价很是敏感 经过一年的锻炼 减肥50斤 现在怎么说也算是穿衣显瘦 也有点肌肉了 但是感觉自己还是一直走不出内心的一种束缚 还是不敢于在许多人面前讲话 不敢在公众场合勇敢展示自己 不敢大声表达自己的意见与看法 自信心还是严重不足 现在很是苦恼 ！ 健身是个好习惯 现在我基本每周去三四次 已经健身一年多 而且我会一直将这个好习惯保持下去 但感觉健身对于个人来说作用还是有限. 好的身材固然能带来一定的自信提升 但根本的还是自己需"
+    [EYInputPopupView popViewWithTitle:@"我是标题我是标题我是标题我是标题" contentText:@"的 但在与人相处以及平时做事时 还是会需"
                                   type:EYInputPopupView_Type_multi_line
                            cancelBlock:^{
                                

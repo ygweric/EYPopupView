@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5F1F30CB1B7DEC300025120E /* EYTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1F30CA1B7DEC300025120E /* EYTagView.m */; };
+		5F1F30CE1B7E00850025120E /* EYTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1F30CD1B7E00850025120E /* EYTextField.m */; };
 		5F3FDFA31B775B6200DE721B /* EYTagPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3FDFA21B775B6200DE721B /* EYTagPopupView.m */; };
 		5F46273F1B7219BF009695EC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F46273E1B7219BF009695EC /* main.m */; };
 		5F4627421B7219BF009695EC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F4627411B7219BF009695EC /* AppDelegate.m */; };
@@ -35,6 +36,8 @@
 /* Begin PBXFileReference section */
 		5F1F30C91B7DEC300025120E /* EYTagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EYTagView.h; sourceTree = "<group>"; };
 		5F1F30CA1B7DEC300025120E /* EYTagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EYTagView.m; sourceTree = "<group>"; };
+		5F1F30CC1B7E00850025120E /* EYTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EYTextField.h; sourceTree = "<group>"; };
+		5F1F30CD1B7E00850025120E /* EYTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EYTextField.m; sourceTree = "<group>"; };
 		5F3FDFA11B775B6200DE721B /* EYTagPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EYTagPopupView.h; sourceTree = "<group>"; };
 		5F3FDFA21B775B6200DE721B /* EYTagPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EYTagPopupView.m; sourceTree = "<group>"; };
 		5F4627391B7219BF009695EC /* EYPopupView_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EYPopupView_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,6 +87,8 @@
 			children = (
 				5F1F30C91B7DEC300025120E /* EYTagView.h */,
 				5F1F30CA1B7DEC300025120E /* EYTagView.m */,
+				5F1F30CC1B7E00850025120E /* EYTextField.h */,
+				5F1F30CD1B7E00850025120E /* EYTextField.m */,
 			);
 			name = EYTagView;
 			path = ../EYTagView/EYTagView;
@@ -275,6 +280,7 @@
 				5F4627961B7342B8009695EC /* EYPopupView.m in Sources */,
 				5F1F30CB1B7DEC300025120E /* EYTagView.m in Sources */,
 				5F4627421B7219BF009695EC /* AppDelegate.m in Sources */,
+				5F1F30CE1B7E00850025120E /* EYTextField.m in Sources */,
 				5F3FDFA31B775B6200DE721B /* EYTagPopupView.m in Sources */,
 				5F4627941B7342B8009695EC /* EYInputPopupView.m in Sources */,
 				5F46273F1B7219BF009695EC /* main.m in Sources */,

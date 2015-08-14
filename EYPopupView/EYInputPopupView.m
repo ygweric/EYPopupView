@@ -8,12 +8,11 @@
 
 #import "EYInputPopupView.h"
 #import "EYPopupViewMacro.h"
+#import "EYTextField.h"
 
 #define CONTENT_VIEW_POPVIEW ((popView.type==EYInputPopupView_Type_single_line_text)?popView.tfContent:popView.tvContent)
 #define CONTENT_VIEW ((_type==EYInputPopupView_Type_single_line_text)?_tfContent:_tvContent)
 #define CONTENT_TEXT ((_type==EYInputPopupView_Type_single_line_text)?_tfContent.text:_tvContent.text)
-
-
 
 
 @interface EYInputPopupView ()<UITextViewDelegate,UITextFieldDelegate>
@@ -66,8 +65,11 @@
     switch (type) {
         case EYInputPopupView_Type_single_line_text:
         {
-            popView.tfContent = [[UITextField alloc] initWithFrame:CGRectMake((kAlertWidth - kContentWidth) * 0.5, CGRectGetMaxY(popView.lbTitle.frame)+kContentTopMargin, kContentWidth, kContentMinHeight)];
-            popView.tfContent.delegate=popView;;
+            popView.tfContent = [[EYTextField alloc] initWithFrame:CGRectMake((kAlertWidth - kContentWidth) * 0.5, CGRectGetMaxY(popView.lbTitle.frame)+kContentTopMargin, kContentWidth, kContentMinHeight)];
+            popView.tfContent.delegate=popView;
+            popView.tfContent.layer.cornerRadius=3;
+            popView.tfContent.layer.borderColor=COLORRGB(0xaeeeeee).CGColor;
+            popView.tfContent.layer.borderWidth=0.5;
             popView.tfContent.textAlignment = NSTextAlignmentLeft;
             popView.tfContent.textColor = [UIColor colorWithRed:127.0/255.0 green:127.0/255.0 blue:127.0/255.0 alpha:1];
             popView.tfContent.font = [UIFont systemFontOfSize:15.0f];
@@ -80,6 +82,9 @@
         {
             popView.tvContent = [[UITextView alloc] initWithFrame:CGRectMake((kAlertWidth - kContentWidth) * 0.5, CGRectGetMaxY(popView.lbTitle.frame)+kContentTopMargin, kContentWidth, kContentMinHeight)];
             popView.tvContent.editable=YES;
+            popView.tvContent.layer.cornerRadius=3;
+            popView.tvContent.layer.borderColor=COLORRGB(0xaeeeeee).CGColor;
+            popView.tvContent.layer.borderWidth=0.5;
             popView.tvContent.delegate=popView;;
             popView.tvContent.selectable=YES;
             popView.tvContent.textAlignment = NSTextAlignmentLeft;
@@ -95,8 +100,8 @@
             break;
     }
     
-    CGRect leftBtnFrame = CGRectMake((kAlertWidth - 2 * kCoupleButtonWidth - kButtonBottomMargin) * 0.5, CGRectGetMaxY(CONTENT_VIEW_POPVIEW.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
-    CGRect rightBtnFrame = CGRectMake(CGRectGetMaxX(leftBtnFrame) + kButtonBottomMargin, CGRectGetMaxY(CONTENT_VIEW_POPVIEW.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
+    CGRect leftBtnFrame = CGRectMake((kAlertWidth - 2 * kCoupleButtonWidth - kButtonBottomMargin-5) * 0.5, CGRectGetMaxY(CONTENT_VIEW_POPVIEW.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
+    CGRect rightBtnFrame = CGRectMake(CGRectGetMaxX(leftBtnFrame) + kButtonBottomMargin+5, CGRectGetMaxY(CONTENT_VIEW_POPVIEW.frame)+kContentBottomMargin, kCoupleButtonWidth, kButtonHeight);
     popView.leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     popView.rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     popView.leftBtn.frame = leftBtnFrame;

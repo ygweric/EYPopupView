@@ -11,6 +11,7 @@
 
 
 #import "EYTagView.h"
+#import "EYTextField.h"
 
 @interface EYCheckBoxButton :UIButton
 @property (nonatomic, strong) UIColor* colorBg;
@@ -31,24 +32,6 @@
     }
     [self setNeedsDisplay];
 }
-@end
-
-
-@interface EYTextField : UITextField
-
-@end
-@implementation EYTextField
-
-// placeholder position
-- (CGRect)textRectForBounds:(CGRect)bounds {
-    return CGRectInset( bounds , 6 , 0 );
-}
-
-// text position
-- (CGRect)editingRectForBounds:(CGRect)bounds {
-    return CGRectInset( bounds , 6 , 0 );
-}
-
 @end
 
 
