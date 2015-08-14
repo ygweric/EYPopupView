@@ -44,3 +44,5 @@ Thumbs.db
 UserInterfaceState.xcuserstate
 xcuserdata/
 Pods/Pods.xcodeproj/xcuserdata/
+/EYTagView/*
+!/EYTagView/EYTagView
