@@ -16,9 +16,10 @@ I will improve this project always, so you can push your request or the issuse h
 
 ###What can EYPopupView do and How to use it.
 
-1. show sing line alert
+1\ show single line alert
 
 ![single-line-display.gif](https://raw.githubusercontent.com/ygweric/EYPopupView/master/screenshots/single-line-display.gif)
+
 ```
  [EYTextPopupView popViewWithTitle:@"我是标题" contentText:@"我是正文"
                                                     leftButtonTitle:@"左键"
@@ -34,7 +35,8 @@ I will improve this project always, so you can push your request or the issuse h
                                                        }];
 ```
 
-2. show multiple lines alert
+2\ show multiple lines alert
+
 ![multi-line-display.gif](https://raw.githubusercontent.com/ygweric/EYPopupView/master/screenshots/multi-line-display.gif)
 
 ```
@@ -51,8 +53,11 @@ I will improve this project always, so you can push your request or the issuse h
                              NSLog(@"Do something interesting after dismiss block");
                          }];
 ```
-3. show single line input pop view
+3\ show single line input pop view
+
+
 ![single-line-edit.gif](https://raw.githubusercontent.com/ygweric/EYPopupView/master/screenshots/single-line-edit.gif)
+
 ```
 [EYInputPopupView popViewWithTitle:@"我是标题我是标题我是标题我是标题" contentText:@"Do somethi"
                                         type:EYInputPopupView_Type_single_line_text
@@ -65,8 +70,11 @@ I will improve this project always, so you can push your request or the issuse h
                                                            }];
 ```
 
-4. show multiple lines input pop view
+4\ show multiple lines input pop view
+
+
 ![multi-lines-input.gif](https://raw.githubusercontent.com/ygweric/EYPopupView/master/screenshots/multi-lines-input.gif)
+
 ```
 EYInputPopupView popViewWithTitle:@"我是标题我是标题我是标题我是标题" contentText:@"的 但在与人相处以及平时做事时 还是会需"
                                   type:EYInputPopupView_Type_multi_line
@@ -129,8 +137,11 @@ NSArray* _tags=@[
 ```
 
 
-5. show tag edit view
+5\ show tag edit view
+
+
 ![tag_edit.gif](https://raw.githubusercontent.com/ygweric/EYPopupView/master/screenshots/tag_edit.gif)
+
 ```
 [EYTagPopupView popViewWithTitle:@"我是标题我是标题我是标题我是标题"
                                 tags:_tags
@@ -144,8 +155,11 @@ NSArray* _tags=@[
                         }];
 ```
 
-6. show raido choosing view
+6\ show raido choosing view
+
+
 ![radio.gif](https://raw.githubusercontent.com/ygweric/EYPopupView/master/screenshots/radio.gif)
+
 ```
 [EYTagPopupView popViewWithTitle:@"我是标题我是标题我是标题我是标题"
                                 tags:_tags
@@ -158,8 +172,11 @@ NSArray* _tags=@[
                              
                          }];
 ```
-7. show checkbox choosing view
+7\ show checkbox choosing view
+
+
 ![checkbox.gif](https://raw.githubusercontent.com/ygweric/EYPopupView/master/screenshots/checkbox.gif)
+
 ```
 [EYTagPopupView popViewWithTitle:@"我是标题我是标题我是标题我是标题"
                                 tags:_tags
