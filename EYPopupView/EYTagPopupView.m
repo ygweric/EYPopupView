@@ -103,8 +103,8 @@
     
     [popView.rightBtn setBackgroundImage:[UIImage imageWithColor:COLORRGB(0xfca2a5)] forState:UIControlStateNormal];
     [popView.leftBtn setBackgroundImage:[UIImage imageWithColor:COLORRGB(0x90d3fe)] forState:UIControlStateNormal];
-    [popView.rightBtn setTitle:@"确定" forState:UIControlStateNormal];
-    [popView.leftBtn setTitle:@"取消" forState:UIControlStateNormal];
+    [popView.rightBtn setTitle:EYLOCALSTRING(@"OK") forState:UIControlStateNormal];
+    [popView.leftBtn setTitle:EYLOCALSTRING(@"Cancel") forState:UIControlStateNormal];
     popView.leftBtn.titleLabel.font = popView.rightBtn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
     [popView.leftBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [popView.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

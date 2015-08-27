@@ -6,6 +6,10 @@
 //  Copyright (c) 2015 Eric Yang. All rights reserved.
 //
 
+#ifndef EYLOCALSTRING
+#define EYLOCALSTRING(STR) NSLocalizedString(STR, STR)
+#endif
+
 #ifndef EYPopupView_Example_EYPopupViewHeader_h
 #define EYPopupView_Example_EYPopupViewHeader_h
 

@@ -5,9 +5,14 @@
 //  Created by ericyang on 8/6/15.
 //  Copyright (c) 2015 Eric Yang. All rights reserved.
 //
+#ifndef EYLOCALSTRING
+#define EYLOCALSTRING(STR) NSLocalizedString(STR, STR)
+#endif
+
 
 #ifndef EYPopupView_Example_EYPopupViewMacro_h
 #define EYPopupView_Example_EYPopupViewMacro_h
+
 
 #define COLORRGBA(c,a) [UIColor colorWithRed:((c>>16)&0xFF)/255.0	\
 green:((c>>8)&0xFF)/255.0	\

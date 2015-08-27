@@ -13,6 +13,11 @@ Those are the reason I wrote EYPopupView, which you can do those things with onl
 
 I will improve this project always, so you can push your request or the issuse helping me improve EYPopupView.
 
+### UPDATE: realize Internationalize 27/8/2015
+
+![eng-text.png](https://raw.githubusercontent.com/ygweric/EYPopupView/master/screenshots/eng-text.png)
+![eng_tag.png](https://raw.githubusercontent.com/ygweric/EYPopupView/master/screenshots/eng_tag.png)
+
 
 ###What can EYPopupView do and How to use it.
 

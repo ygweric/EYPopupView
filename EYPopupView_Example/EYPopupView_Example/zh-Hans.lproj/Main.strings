@@ -1,0 +1,24 @@
+
+/* Class = "UIButton"; normalTitle = "show single text"; ObjectID = "9m7-as-xnb"; */
+"9m7-as-xnb.normalTitle" = "show single text";
+
+/* Class = "UIButton"; normalTitle = "show radio tag"; ObjectID = "ESa-zy-aCM"; */
+"ESa-zy-aCM.normalTitle" = "show radio tag";
+
+/* Class = "UIButton"; normalTitle = "show tag edit view"; ObjectID = "KCY-S4-Xse"; */
+"KCY-S4-Xse.normalTitle" = "show tag edit view";
+
+/* Class = "UIButton"; normalTitle = "show single line input view"; ObjectID = "Ma0-Cf-y8Z"; */
+"Ma0-Cf-y8Z.normalTitle" = "show single line input view";
+
+/* Class = "UIButton"; normalTitle = "show multi line input view"; ObjectID = "TWb-2o-XoD"; */
+"TWb-2o-XoD.normalTitle" = "show multi line input view";
+
+/* Class = "UIButton"; normalTitle = "show checkbox tag"; ObjectID = "WiD-XX-kh1"; */
+"WiD-XX-kh1.normalTitle" = "show checkbox tag";
+
+/* Class = "UIButton"; normalTitle = "show multi text"; ObjectID = "XcB-5d-aEz"; */
+"XcB-5d-aEz.normalTitle" = "show multi text";
+
+/* Class = "UIButton"; normalTitle = "show scroll text"; ObjectID = "xlP-xy-EXp"; */
+"xlP-xy-EXp.normalTitle" = "show scroll text";

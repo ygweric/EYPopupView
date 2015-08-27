@@ -9,15 +9,7 @@
 #import "EYPopupView.h"
 
 /**
- [EYInputPopupView popViewWithTitle:@"我是标题我是标题我是标题我是标题" contentText:@"Do somethi"
- type:EYInputPopupView_Type_single_line_text
- cancelBlock:^{
- 
- } confirmBlock:^(UIView *view, NSString *text) {
- 
- } dismissBlock:^{
- 
- }];
+
  */
 
 typedef void (^clickBlock)(UIView* view, NSString* text);

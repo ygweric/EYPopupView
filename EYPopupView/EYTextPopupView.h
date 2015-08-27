@@ -8,20 +8,7 @@
 
 #import "EYPopupView.h"
 
-/**
- [EYTextPopupView popViewWithTitle:@"我是标题" contentText:@"我是正文"
- leftButtonTitle:@"左键"
- rightButtonTitle:@"右键"
- leftBlock:^() {
- NSLog(@"left button clicked");
- }
- rightBlock:^() {
- NSLog(@"left button clicked");
- }
- dismissBlock:^() {
- NSLog(@"Do something interesting after dismiss block");
- }];
- */
+
 @interface EYTextPopupView : EYPopupView
 
 + (void)popViewWithTitle:(NSString *)title
